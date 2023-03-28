@@ -282,7 +282,11 @@ namespace Opc.Ua
         /// Compares string fields of two distinguished names.
         /// </summary>
         private static bool CompareDistinguishedNameFields(IList<string> fields1, IList<string> fields2)
-        {
+        {            
+            //sort fields for comparison else it will fails if order is different
+            fields1 = fields1.OrderBy(x => x).ToList();
+            fields2 = fields2.OrderBy(x => x).ToList();
+            
             // compare each.
             for (int ii = 0; ii < fields1.Count; ii++)
             {
